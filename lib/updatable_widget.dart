@@ -2,12 +2,12 @@ library updatable_widget;
 
 import 'package:flutter/material.dart';
 
-typedef CreateWidget = Widget Function(BuildContext context, dynamic data);
+typedef CreateWidget<T> = Widget Function(BuildContext context, T data);
 
-class UpdatableWidget extends StatefulWidget {
+class UpdatableWidget<T> extends StatefulWidget {
   UpdatableWidget({Key? key, required this.createWidget, this.controller}) : super(key: key);
 
-  CreateWidget createWidget;
+  CreateWidget<T> createWidget;
   UpdatableWidgetController? controller;
 
   @override
@@ -35,10 +35,12 @@ class _UpdatableWidgetState extends State<UpdatableWidget> {
   }
 }
 
-class UpdatableWidgetController extends ChangeNotifier {
-  dynamic data;
+class UpdatableWidgetController<T> extends ChangeNotifier {
+  UpdatableWidgetController({this.data});
 
-  void setValue(dynamic data) {
+  T? data;
+
+  void setValue(T data) {
     this.data = data;
     notifyListeners();
   }

@@ -8,15 +8,17 @@ You can use this widget like this:
 > 1. Create controller for the widget
 
     
-    final myController = UpdatableWidgetController();
+    final myController = UpdatableWidgetController<dynamic>();
 
+**_or_**
+
+    final myController = UpdatableWidgetController<String>("Test");
 
 > 2. Create Widget:
 
-
-    UpdatableWidget(
+    UpdatableWidget<String>(
         controller: myController,
-        createWidget: (BuildContext context, dynamic data) {
+        createWidget: (BuildContext context, String data) {
             //Now you can cast data object to your desired object
             MyObject response = data as MyObject;
             return Container();
