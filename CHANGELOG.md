@@ -1,3 +1,6 @@
+## 0.0.4
+* Minor Bug Fixes
+
 ## 0.0.3
 * Now you can initialize `UpdatableWidgetController` with initial value
 * The `UpdatableWidget` and `UpdatableWidgetController` are now support types.

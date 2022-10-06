@@ -2,22 +2,21 @@ library updatable_widget;
 
 import 'package:flutter/material.dart';
 
-typedef CreateWidget<T> = Widget Function(BuildContext context, T data);
-
 class UpdatableWidget<T> extends StatefulWidget {
-  UpdatableWidget({Key? key, required this.createWidget, this.controller}) : super(key: key);
+  UpdatableWidget({Key? key, required this.controller, required this.createWidget, this.tag}) : super(key: key);
 
-  CreateWidget<T> createWidget;
-  UpdatableWidgetController? controller;
+  String? tag;
+  Widget Function(BuildContext, dynamic) createWidget;
+  UpdatableWidgetController<T> controller;
 
   @override
-  State<UpdatableWidget> createState() => _UpdatableWidgetState();
+  State<UpdatableWidget> createState() => _UpdatableWidgetState<T>();
 }
 
-class _UpdatableWidgetState extends State<UpdatableWidget> {
+class _UpdatableWidgetState<T> extends State<UpdatableWidget> {
   @override
   void initState() {
-    widget.controller?.addListener(() {
+    widget.controller.addListener(() {
       setState(() {});
     });
     super.initState();
@@ -25,13 +24,13 @@ class _UpdatableWidgetState extends State<UpdatableWidget> {
 
   @override
   void dispose() {
-    widget.controller?.dispose();
+    widget.controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return widget.createWidget(context, widget.controller?.data);
+    return widget.createWidget(context, widget.controller.data);
   }
 }
 
