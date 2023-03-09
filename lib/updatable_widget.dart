@@ -38,7 +38,7 @@ class UpdatableWidgetController<T> extends ChangeNotifier {
   UpdatableWidgetController({this.data});
 
   T? data;
-  bool _isDisposed = false;
+  bool isDisposed = false;
 
   void setValue(T data) {
     this.data = data;
@@ -47,9 +47,9 @@ class UpdatableWidgetController<T> extends ChangeNotifier {
 
   @override
   dispose() {
-    if (!_isDisposed) {
+    if (!isDisposed) {
       super.dispose();
-      _isDisposed = true;
+      isDisposed = true;
     }
   }
 }
