@@ -38,9 +38,18 @@ class UpdatableWidgetController<T> extends ChangeNotifier {
   UpdatableWidgetController({this.data});
 
   T? data;
+  bool _isDisposed = false;
 
   void setValue(T data) {
     this.data = data;
     notifyListeners();
+  }
+
+  @override
+  dispose() {
+    if (!_isDisposed) {
+      super.dispose();
+      _isDisposed = true;
+    }
   }
 }

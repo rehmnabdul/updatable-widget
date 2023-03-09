@@ -1,6 +1,6 @@
 name: updatable_widget
 description: Automatically Updatable Widget
-version: 0.0.4
+version: 0.0.5
 homepage: https://github.com/rehmnabdul/updatable-widget
 
 environment:
