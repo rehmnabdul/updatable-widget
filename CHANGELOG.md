@@ -1,3 +1,9 @@
+## 0.0.6
+* You can now get is controller disposed or not
+
+## 0.0.5
+* Minor Bug Fixes
+
 ## 0.0.4
 * Minor Bug Fixes
 

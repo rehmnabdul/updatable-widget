@@ -1,9 +1,18 @@
 library updatable_widget;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+printLog(String message) {
+  if (kDebugMode) {
+    print("UPDATABLE WIDGET: $message");
+  }
+}
+
 class UpdatableWidget<T> extends StatefulWidget {
-  UpdatableWidget({Key? key, required this.controller, required this.createWidget, this.tag}) : super(key: key);
+  UpdatableWidget(
+      {Key? key, required this.controller, required this.createWidget, this.tag})
+      : super(key: key);
 
   String? tag;
   Widget Function(BuildContext, dynamic) createWidget;
@@ -38,18 +47,24 @@ class UpdatableWidgetController<T> extends ChangeNotifier {
   UpdatableWidgetController({this.data});
 
   T? data;
-  bool isDisposed = false;
+  bool _isDisposed = false;
+
+  bool get isDisposed => _isDisposed;
 
   void setValue(T data) {
+    if (_isDisposed) {
+      printLog("The widget is disposed. Data can't be updated");
+      return;
+    }
     this.data = data;
     notifyListeners();
   }
 
   @override
   dispose() {
-    if (!isDisposed) {
+    if (!_isDisposed) {
       super.dispose();
-      isDisposed = true;
+      _isDisposed = true;
     }
   }
 }
